@@ -135,8 +135,6 @@ namespace NTFSCopy
             }
 
             // Perform copy
-
-
             Console.Write("Found data, copying ");
             Console.Write(fileStream.Length.ToString("N0"));
             Console.Write(" bytes to ");
@@ -152,7 +150,7 @@ namespace NTFSCopy
                 }
 
                 byte[] buff = new byte[65536];
-                int lastProgressed = -1;
+                //int lastProgressed = -1;
                 for (long offset = 0; offset < fileStream.Length; offset += buff.Length)
                 {
                     int read = fileStream.Read(buff, 0, buff.Length);
@@ -161,36 +159,10 @@ namespace NTFSCopy
                     {
                         break;
                     }
-
-                    Console.Write("read: " + read.ToString());
+                    //Console.Write("read: " + read.ToString());
                     fs.Write(buff, 0, read);
-
-                    int progressed = (int)((offset * 1f / fileStream.Length) * 20);
-                    if (read != buff.Length)
-                        // Finished
-                        progressed = 20;
-
-                    if (lastProgressed != progressed)
-                    {
-                        Console.Write("[");
-                        for (int i = 0; i < 20; i++)
-                        {
-                            if (i < progressed)
-                                Console.Write("=");
-                            else if (i == progressed)
-                                Console.Write(">");
-                            else
-                                Console.Write(" ");
-                        }
-                        Console.Write("]");
-                        Console.CursorLeft = 0;
-
-                        lastProgressed = progressed;
-                    }
                 }
-                Console.WriteLine();
-
-                Console.WriteLine("Done.", ConsoleColor.Green);
+                Console.WriteLine("Done.");
             }
         }
 
