@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31313.79
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NTFSCopy", "NTFSCopy.csproj", "{3166F3C9-6D43-4719-BB9F-5FBFD928A542}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NTFSLib", "NTFSLib\NTFSLib.csproj", "{56E61823-F056-4E99-99EE-89CCBD5055E9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NTFSLib.Helpers", "NTFSLib.Helpers\NTFSLib.Helpers.csproj", "{6E05AB3A-A3E3-4BCC-A121-8A9F332CDB96}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3166F3C9-6D43-4719-BB9F-5FBFD928A542}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3166F3C9-6D43-4719-BB9F-5FBFD928A542}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3166F3C9-6D43-4719-BB9F-5FBFD928A542}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3166F3C9-6D43-4719-BB9F-5FBFD928A542}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56E61823-F056-4E99-99EE-89CCBD5055E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56E61823-F056-4E99-99EE-89CCBD5055E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56E61823-F056-4E99-99EE-89CCBD5055E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56E61823-F056-4E99-99EE-89CCBD5055E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E05AB3A-A3E3-4BCC-A121-8A9F332CDB96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E05AB3A-A3E3-4BCC-A121-8A9F332CDB96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E05AB3A-A3E3-4BCC-A121-8A9F332CDB96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E05AB3A-A3E3-4BCC-A121-8A9F332CDB96}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {67022B29-4BBE-4369-8AAB-CFD667AC2D1F}
+	EndGlobalSection
+EndGlobal

@@ -7,7 +7,7 @@ using System.Linq;
 using NTFSLib.Objects.Enums;
 using RawDiskLib;
 
-namespace NtfsCopy
+namespace NTFSCopy
 {
     public class Options
     {
@@ -35,19 +35,19 @@ namespace NtfsCopy
 
             _options = new OptionSet();
             _options.Add("file=", "Source file", s =>
-                {
-                    SourceType = PathType.File;
-                    Source = s;
-                });
+            {
+                SourceType = PathType.File;
+                Source = s;
+            });
             _options.Add("attribute=", "Source Attribute Type", s =>
-                {
-                    if (Enum.IsDefined(typeof(AttributeType), s))
-                        SourceAttribute = (AttributeType)Enum.Parse(typeof(AttributeType), s);
-                });
+            {
+                if (Enum.IsDefined(typeof(AttributeType), s))
+                    SourceAttribute = (AttributeType)Enum.Parse(typeof(AttributeType), s);
+            });
             _options.Add("attributename=", "Source Attribute Name", s =>
-                {
-                    SourceName = s;
-                });
+            {
+                SourceName = s;
+            });
 
             _options.Add("volume=", "Source volume", s =>
             {

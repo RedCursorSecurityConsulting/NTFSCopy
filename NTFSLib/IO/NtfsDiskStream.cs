@@ -107,7 +107,7 @@ namespace NTFSLib.IO
                 long diskOffset = fragment.LCN * _bytesPrCluster;
                 long fragmentLength = fragment.Clusters * _bytesPrCluster;
 
-                int actualRead;
+                int actualRead = 0;
                 if (fragment.IsCompressed)
                 {
                     // Read and decompress

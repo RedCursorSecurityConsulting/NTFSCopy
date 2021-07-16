@@ -12,7 +12,7 @@ using NTFSLib.Objects.Enums;
 using RawDiskLib;
 using Attribute = NTFSLib.Objects.Attributes.Attribute;
 
-namespace NtfsCopy
+namespace NTFSCopy
 {
     class Program
     {
@@ -24,10 +24,10 @@ namespace NtfsCopy
 
             if (!success)
             {
-                AwesomeConsole.WriteLine("Unable to parse the commandline:");
+                Console.WriteLine("Unable to parse the commandline:");
                 PrintError(opts.ErrorDetails);
-                AwesomeConsole.WriteLine();
-                AwesomeConsole.WriteLine("Try --help for more informations");
+                Console.WriteLine();
+                Console.WriteLine("Try --help for more informations");
                 return;
             }
 
@@ -51,7 +51,7 @@ namespace NtfsCopy
                 if (wrapper.FileRecordCount < mftId)
                 {
                     PrintError("The given path or MftID didn't exist");
-                    AwesomeConsole.WriteLine();
+                    Console.WriteLine();
 
                     switch (opts.SourceType)
                     {
@@ -63,7 +63,7 @@ namespace NtfsCopy
                             break;
                     }
 
-                    AwesomeConsole.WriteLine();
+                    Console.WriteLine();
 
                     return;
                 }
@@ -86,7 +86,7 @@ namespace NtfsCopy
             if (!attribs.Any())
             {
                 PrintError("Unable to find any attribute named \"" + opts.SourceName + "\" of type " + opts.SourceAttribute);
-                AwesomeConsole.WriteLine();
+                Console.WriteLine();
                 return;
             }
 
@@ -108,7 +108,7 @@ namespace NtfsCopy
                 if (attribs.Count != 1)
                 {
                     PrintError("There were multiple attributes for this single file that matched, yet they were all Resident. This is an error.");
-                    AwesomeConsole.WriteLine();
+                    Console.WriteLine();
                     return;
                 }
 
@@ -129,36 +129,40 @@ namespace NtfsCopy
                 else
                 {
                     PrintError("Only certain resident attributes are supported, like $DATA");
-                    AwesomeConsole.WriteLine();
+                    Console.WriteLine();
                     return;
                 }
             }
 
             // Perform copy
-            using (AwesomeConsole.BeginSequentialWrite())
-            {
-                AwesomeConsole.Write("Found data, copying ");
-                AwesomeConsole.Write(fileStream.Length.ToString("N0"), ConsoleColor.Green);
-                AwesomeConsole.Write(" bytes to ");
-                AwesomeConsole.WriteLine(opts.Destination, ConsoleColor.Green);
-            }
+
+
+            Console.Write("Found data, copying ");
+            Console.Write(fileStream.Length.ToString("N0"));
+            Console.Write(" bytes to ");
+            Console.WriteLine(opts.Destination);
+
 
             using (FileStream fs = File.OpenWrite(opts.Destination))
             {
                 if (fs.CanSeek && fs.CanWrite)
+                {
                     // Pre-expand the destination, to help filesystems allocate files
                     fs.SetLength(fileStream.Length);
+                }
 
-                byte[] buff = new byte[65535];
+                byte[] buff = new byte[65536];
                 int lastProgressed = -1;
                 for (long offset = 0; offset < fileStream.Length; offset += buff.Length)
                 {
                     int read = fileStream.Read(buff, 0, buff.Length);
 
                     if (read == 0)
-                        // Finished
+                    {
                         break;
+                    }
 
+                    Console.Write("read: " + read.ToString());
                     fs.Write(buff, 0, read);
 
                     int progressed = (int)((offset * 1f / fileStream.Length) * 20);
@@ -168,25 +172,25 @@ namespace NtfsCopy
 
                     if (lastProgressed != progressed)
                     {
-                        AwesomeConsole.Write("[");
+                        Console.Write("[");
                         for (int i = 0; i < 20; i++)
                         {
                             if (i < progressed)
-                                AwesomeConsole.Write("=");
+                                Console.Write("=");
                             else if (i == progressed)
-                                AwesomeConsole.Write(">");
+                                Console.Write(">");
                             else
-                                AwesomeConsole.Write(" ");
+                                Console.Write(" ");
                         }
-                        AwesomeConsole.Write("]");
+                        Console.Write("]");
                         Console.CursorLeft = 0;
 
                         lastProgressed = progressed;
                     }
                 }
-                AwesomeConsole.WriteLine();
+                Console.WriteLine();
 
-                AwesomeConsole.WriteLine("Done.", ConsoleColor.Green);
+                Console.WriteLine("Done.", ConsoleColor.Green);
             }
         }
 
@@ -230,7 +234,7 @@ namespace NtfsCopy
 
         private static void PrintError(string error)
         {
-            AwesomeConsole.Write(error, ConsoleColor.Red);
+            Console.Write(error);
         }
     }
 }
